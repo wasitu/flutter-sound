@@ -124,6 +124,9 @@ class FlutterSoundRecorder implements FlutterSoundRecorderCallback {
   /// True if `recorderState.isPaused`
   bool get isPaused => (_recorderState == RecorderState.isPaused);
 
+  /// Return true if the Recorder has been open
+  bool isOpen() => (_isInited == Initialized.fullyInitialized);
+
   //===================================  Callbacks ================================================================
 
   /// Callback from the &tau; Core. Must not be called by the App
