@@ -22,9 +22,9 @@
 
 #import "FlutterSoundPlayer.h"
 #import <AVFoundation/AVFoundation.h>
-#import <tau_sound_core/FlautoPlayer.h>
-#import <tau_sound_core/FlautoTrackPlayer.h>
-#import <tau_sound_core/FlautoTrack.h>
+#import "FlautoPlayer.h"
+#import "FlautoTrackPlayer.h"
+#import "FlautoTrack.h"
 #import "FlutterSoundPlayerManager.h"
          
  
