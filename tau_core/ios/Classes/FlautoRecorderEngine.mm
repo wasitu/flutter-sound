@@ -41,8 +41,13 @@
         previousTS = 0;
         status = 0;
 
-        AVAudioInputNode* inputNode = [engine inputNode];
         AVAudioFormat* inputFormat = [inputNode outputFormatForBus: 0];
+        // Fix bug when sampleRate is less than 32000 record does not work.
+        if (inputFormat.sampleRate <= 32000) {
+            [[AVAudioSession sharedInstance] setPreferredSampleRate:48000 error:nil];
+            engine = [[AVAudioEngine alloc] init];
+            inputFormat = [[engine inputNode] outputFormatForBus:0];
+        }
         NSNumber* nbChannels = audioSettings [AVNumberOfChannelsKey];
         NSNumber* sampleRate = audioSettings [AVSampleRateKey];
         //sampleRate = [NSNumber numberWithInt: 44000];
@@ -62,7 +67,7 @@
         }
 
 
-        [inputNode installTapOnBus: 0 bufferSize: 20480 format: inputFormat block:
+        [[engine inputNode] installTapOnBus: 0 bufferSize: 20480 format: inputFormat block:
         ^(AVAudioPCMBuffer * _Nonnull buffer, AVAudioTime * _Nonnull when)
         {
                 inputStatus = AVAudioConverterInputStatus_HaveData ;
