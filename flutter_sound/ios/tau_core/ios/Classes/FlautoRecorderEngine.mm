@@ -67,7 +67,7 @@
         }
 
 
-        [[engine inputNode] installTapOnBus: 0 bufferSize: 20480 format: inputFormat block:
+        [[engine inputNode] installTapOnBus: 0 bufferSize: 4096 format: inputFormat block:
         ^(AVAudioPCMBuffer * _Nonnull buffer, AVAudioTime * _Nonnull when)
         {
                 inputStatus = AVAudioConverterInputStatus_HaveData ;

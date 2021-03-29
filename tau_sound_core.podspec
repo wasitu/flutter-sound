@@ -7,7 +7,7 @@
 #
 
 Pod::Spec.new do |s|
-  s.name             = 'tau_sound_core_wasitu'
+  s.name             = 'tau_sound_core'
   s.version          = '8.0.0+6'
   s.summary          = 'Provides simple recorder and player functionalities for both Android and iOS platforms.'
 
@@ -23,14 +23,11 @@ This code was originally inside the flutter_sound/ios directory.
 It has been extracted to be isolated from Flutter and can be used with other frameworks.
                        DESC
 
-  s.homepage         = 'https://github.com/wasitu/flutter-sound'
+  s.homepage         = 'https://github.com/dooboolab/flutter_sound'
   s.license          = { :type => 'LGPL', :file => 'LICENSE' }
-  # s.author           = { 'larpoux' => 'larpoux@gmail.com' }
-#  s.source           = { :git => 'https://github.com/dooboolab/flutter_sound.git', :tag => '' + s.version.to_s }
-  s.source           = { :git => 'https://github.com/wasitu/flutter-sound.git', :tag => 'w3' }
-
+  s.author           = { 'larpoux' => 'larpoux@gmail.com' }
+  s.source           = { :git => 'https://github.com/dooboolab/flutter_sound.git', :tag => '' + s.version.to_s }
   s.ios.deployment_target = '10.0'
-
   s.source_files = 'tau_core/ios/Classes/*'
   s.frameworks = 'AVFoundation', 'MediaPlayer'
 

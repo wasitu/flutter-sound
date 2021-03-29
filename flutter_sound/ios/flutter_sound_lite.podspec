@@ -18,6 +18,10 @@ Flutter plugin that relates to sound like audio and recorder.
 
   s.ios.deployment_target = '10.0'
   s.static_framework = true
-  s.dependency 'tau_sound_core_wasitu', '8.0.0+6'
+  # s.dependency 'tau_sound_core', '8.0.0+6'
   # s.dependency 'mobile-ffmpeg-full', '4.4.LTS'
+  s.subspec 'tau_sound_core' do |a|
+    a.frameworks = 'AVFoundation', 'MediaPlayer'
+    a.source_files = 'tau_core/ios/Classes/*'    
+  end
 end
