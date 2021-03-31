@@ -242,7 +242,12 @@ AudioRecInterface* audioRec;
                 {
                                 return false;
                 }
-                audioRec = new AudioRecorderEngine(codec, path, audioSettings, self);
+                @try {
+                    audioRec = new AudioRecorderEngine(codec, path, audioSettings, self);
+                } @catch (NSException *exception) {
+                    [m_callBack startRecorderCompleted:false];
+                    return false;
+                }
         } else
         {
                 audioRec = new avAudioRec(codec, path, audioSettings, self);

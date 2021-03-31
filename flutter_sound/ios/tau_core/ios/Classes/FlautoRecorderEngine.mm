@@ -41,13 +41,8 @@
         previousTS = 0;
         status = 0;
 
-        AVAudioFormat* inputFormat = [[engine inputNode] outputFormatForBus: 0];
-        // Fix bug when sampleRate is less than 32000 record does not work.
-        if (inputFormat.sampleRate <= 32000) {
-            [[AVAudioSession sharedInstance] setPreferredSampleRate:48000 error:nil];
-            engine = [[AVAudioEngine alloc] init];
-            inputFormat = [[engine inputNode] outputFormatForBus:0];
-        }
+        [[AVAudioSession sharedInstance] setPreferredSampleRate:44100 error:nil];
+        AVAudioFormat* inputFormat = [[AVAudioFormat alloc] initWithCommonFormat:AVAudioPCMFormatFloat32 sampleRate:44100 channels:1 interleaved:YES];
         NSNumber* nbChannels = audioSettings [AVNumberOfChannelsKey];
         NSNumber* sampleRate = audioSettings [AVSampleRateKey];
         //sampleRate = [NSNumber numberWithInt: 44000];
