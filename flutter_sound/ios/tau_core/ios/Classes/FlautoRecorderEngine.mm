@@ -44,7 +44,7 @@
         [[AVAudioSession sharedInstance] setPreferredSampleRate:44100 error:nil];
         AVAudioFormat* inputFormat = [[engine inputNode] outputFormatForBus: 0];
         if (inputFormat.sampleRate == 32000) {
-            inputFormat = nil;
+            inputFormat = [[AVAudioFormat alloc] init];
         }
         NSNumber* nbChannels = audioSettings [AVNumberOfChannelsKey];
         NSNumber* sampleRate = audioSettings [AVSampleRateKey];
