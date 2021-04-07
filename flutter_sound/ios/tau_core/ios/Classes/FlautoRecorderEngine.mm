@@ -42,7 +42,7 @@
         status = 0;
 
         [[AVAudioSession sharedInstance] setPreferredSampleRate:44100 error:nil];
-        AVAudioFormat* inputFormat = [[AVAudioFormat alloc] initWithCommonFormat:AVAudioPCMFormatFloat32 sampleRate:44100 channels:1 interleaved:YES];
+        AVAudioFormat* inputFormat = [[engine inputNode] outputFormatForBus: 0];
         NSNumber* nbChannels = audioSettings [AVNumberOfChannelsKey];
         NSNumber* sampleRate = audioSettings [AVSampleRateKey];
         //sampleRate = [NSNumber numberWithInt: 44000];
