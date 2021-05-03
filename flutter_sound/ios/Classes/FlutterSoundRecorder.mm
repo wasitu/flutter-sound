@@ -28,8 +28,7 @@
 #import <Foundation/Foundation.h>
 
 #import "FlutterSoundRecorder.h"
-#import <tau_core/FlautoRecorder.h>
-
+#import "FlautoRecorder.h"
 
 @implementation FlutterSoundRecorder
 {
@@ -48,7 +47,6 @@
 {
         NSDictionary* dico = @{ @"slotNo": [NSNumber numberWithInt: slotNo],  @"status": [NSNumber numberWithInt: -1], @"recordingData": data};
         [self invokeMethod:@"recordingData" dico: dico ];
-  
 }
 
 - (void)startRecorderCompleted: (bool)success
@@ -206,6 +204,8 @@
         if (b)
         {
                 result([NSNumber numberWithInt: [self getRecorderStatus]]);
+            
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didCatchAudioSessionInterruption:) name:AVAudioSessionInterruptionNotification object:NULL];
         } else
         {
                         [FlutterError
@@ -214,6 +214,19 @@
                         details:nil];
         }
 
+}
+
+- (void)didCatchAudioSessionInterruption: (NSNotification*)notification {
+    NSNumber *interruptType = [notification.userInfo objectForKey:@"AVAudioSessionInterruptionTypeKey"];
+    if ([interruptType unsignedIntegerValue] == AVAudioSessionInterruptionTypeBegan) {
+        // Notify end recording
+        NSDictionary* dico = @{ @"slotNo": [NSNumber numberWithInt: slotNo],  @"status": [NSNumber numberWithInt: -1], @"recordingData": [NSNull null]};
+        [self invokeMethod:@"recordingData" dico: dico ];
+//        [flautoRecorder stopRecorder];
+        
+    } else if ([interruptType unsignedIntegerValue] == AVAudioSessionInterruptionTypeEnded) {
+
+    }
 }
 
 

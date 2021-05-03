@@ -124,6 +124,9 @@ class FlutterSoundRecorder implements FlutterSoundRecorderCallback {
   /// True if `recorderState.isPaused`
   bool get isPaused => (_recorderState == RecorderState.isPaused);
 
+  /// Return true if the Recorder has been open
+  bool isOpen() => (_isInited == Initialized.fullyInitialized);
+
   //===================================  Callbacks ================================================================
 
   /// Callback from the &tau; Core. Must not be called by the App
@@ -578,6 +581,7 @@ class FlutterSoundRecorder implements FlutterSoundRecorderCallback {
     AudioSource audioSource = AudioSource.defaultSource,
   }) async {
     print('FS:---> startRecorder ');
+    Completer completer = Completer();
     await _lock.synchronized(() async {
       await _startRecorder(
         codec: codec,
@@ -587,9 +591,14 @@ class FlutterSoundRecorder implements FlutterSoundRecorderCallback {
         numChannels: numChannels,
         bitRate: bitRate,
         audioSource: audioSource,
-      );
+      ).then((value) {
+        completer.complete();
+      }).catchError((error) {
+        completer.completeError(error);
+      });
     });
     print('FS:<--- startRecorder ');
+    return completer.future;
   }
 
   Future<void> _startRecorder({
@@ -657,16 +666,20 @@ class FlutterSoundRecorder implements FlutterSoundRecorderCallback {
     completer = _startRecorderCompleter;
     print('Calling instance.startRecorder');
     try {
-      await FlutterSoundRecorderPlatform.instance.startRecorder(this,
-          path: toFile,
-          sampleRate: sampleRate,
-          numChannels: numChannels,
-          bitRate: bitRate,
-          codec: codec,
-          toStream: toStream != null,
-          audioSource: audioSource);
-
-      _recorderState = RecorderState.isRecording;
+      () async {
+        FlutterSoundRecorderPlatform.instance
+            .startRecorder(this,
+                path: toFile,
+                sampleRate: sampleRate,
+                numChannels: numChannels,
+                bitRate: bitRate,
+                codec: codec,
+                toStream: toStream != null,
+                audioSource: audioSource)
+            .then((value) {
+          _recorderState = RecorderState.isRecording;
+        });
+      }();
       // if the caller wants OGG/OPUS we must remux the temporary file
       //if (_isOggOpus) {
       //return _savedUri;
