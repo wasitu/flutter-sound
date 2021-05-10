@@ -40,8 +40,8 @@
         dateCumul = 0;
         previousTS = 0;
         status = 0;
-
-        [[AVAudioSession sharedInstance] setPreferredSampleRate:44100 error:nil];
+        
+        [engine reset];
         AVAudioFormat* inputFormat = [[engine inputNode] outputFormatForBus: 0];
         NSNumber* nbChannels = audioSettings [AVNumberOfChannelsKey];
         NSNumber* sampleRate = audioSettings [AVSampleRateKey];
@@ -115,6 +115,7 @@
  
 void AudioRecorderEngine::startRecorder()
 {
+        [engine prepare];
         [engine startAndReturnError: nil];
         previousTS = CACurrentMediaTime() * 1000;
         status = 2;
@@ -135,6 +136,7 @@ void AudioRecorderEngine::stopRecorder()
 
 void AudioRecorderEngine::resumeRecorder()
 {
+        [engine prepare];
         [engine startAndReturnError: nil];
         previousTS = CACurrentMediaTime() * 1000;
         status = 2;
