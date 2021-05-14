@@ -1,4 +1,23 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.dooboolab.fluttersound">
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.dooboolab.fluttersound">
+    <application>
+        <receiver android:name="androidx.media.session.MediaButtonReceiver" tools:node="remove">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MEDIA_BUTTON" />-->
+<!--                <action android:name="android.media.AUDIO_BECOMING_NOISY" />-->
+<!--            </intent-filter>-->
+        </receiver>
+
+        <service android:name="com.dooboolab.TauEngine.FlautoBackgroundAudioService" tools:node="remove">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MEDIA_BUTTON" />-->
+<!--                <action android:name="android.media.AUDIO_BECOMING_NOISY" />-->
+<!--                <action android:name="android.media.browse.FlautoMediaBrowserService" />-->
+<!--            </intent-filter>-->
+        </service>
+    </application>
 
 
 </manifest>
