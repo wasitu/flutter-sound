@@ -364,6 +364,7 @@ AudioRecInterface* audioRec;
 
 - (void)updateRecorderProgress:(NSTimer*) atimer
 {
+        if (audioRec == nil) return;
         assert (recorderTimer == atimer);
         NSNumber* duration = audioRec ->recorderProgress();
         NSNumber * normalizedPeakLevel = audioRec ->dbPeakProgress();

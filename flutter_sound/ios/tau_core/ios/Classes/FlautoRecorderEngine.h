@@ -61,7 +61,7 @@ private:
         long dateCumul = 0;
         long previousTS;
         int status;
-
+        NSObject *audioEngineConfigurationChangeObserver;
 public:
 
 
@@ -73,9 +73,8 @@ public:
         virtual void resumeRecorder();
         virtual NSNumber* dbPeakProgress();
         virtual int getStatus();
-        
-
-
+    virtual void remove();
+    virtual void install(NSString* path, NSMutableDictionary* audioSettings);
 };
 
 
