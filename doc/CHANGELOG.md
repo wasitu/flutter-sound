@@ -7,6 +7,14 @@ permalink: changelog.html
 summary: The Changelog of The &tau; Project.
 toc: false
 ---
+## 8.1.4
+
+- Fix crash [#642](https://github.com/Canardoux/tau/issues/642) . Pull Request [#686](https://github.com/Canardoux/tau/pull/686) that was provided by [@touficzayed](https://github.com/touficzayed) . Thanks to him :-)
+
+## 8.1.3
+
+- Temporary fix on [#665](https://github.com/Canardoux/tau/issues/665) .  Pull Request [#677](https://github.com/Canardoux/tau/pull/677) that was provided by @aaassseee . Thanks to him :-)
+
 ## 8.1.1
 
 - tau_core is now published on `JitPack` and not anymore on `jfrog/bintray`.  [#658](https://github.com/Canardoux/tau/issues/658)
@@ -22,6 +30,10 @@ toc: false
 ## 8.0.0
 
 - Null Safety
+
+## 7.8.0
+
+- tau_core is now published on JitPack instead of Jfrog/Bintray
 
 ## 7.7.0
 
