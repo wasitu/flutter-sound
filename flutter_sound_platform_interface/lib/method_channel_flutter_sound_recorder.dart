@@ -43,7 +43,7 @@ class MethodChannelFlutterSoundRecorder extends FlutterSoundRecorderPlatform
     //channel = const MethodChannel('com.dooboolab.flutter_sound_recorder');
     _channel.setMethodCallHandler((MethodCall call)
     {
-      return channelMethodCallHandler(call)!;
+      return channelMethodCallHandler(call) ?? Future.value();
     });
   }
 

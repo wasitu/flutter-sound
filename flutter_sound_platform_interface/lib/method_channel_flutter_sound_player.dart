@@ -48,7 +48,7 @@ class MethodChannelFlutterSoundPlayer extends FlutterSoundPlayerPlatform
     //_channel = const MethodChannel('com.dooboolab.flutter_sound_player');
     _channel.setMethodCallHandler((MethodCall call)
     {
-      return channelMethodCallHandler(call)!;
+      return channelMethodCallHandler(call) ?? Future.value();
     });
   }
 
